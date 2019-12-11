@@ -1,5 +1,60 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## TO REMEMBER / LEARN : 
+
+The <Provider /> makes the Redux store available to any nested components that have been wrapped in the connect() function.
+
+(The connect function) does not modify the component class passed to it; instead, it returns a new, connected component class that wraps the component you passed in.
+
+// GET DATA FROM REDUX STORE INTO A COMPONENT 
+// by convention mapStateToProps but any name can works
+// the flow in the component js file 
+// 1) import { connect } from 'react-redux
+// 2) export default connect(mapStateToProps)(component)
+// 3) define mapStateToProps(state)
+
+// mapStateToProps is always taking first argument of state
+// and returning an object showing up props inside a component 
+
+
+// IMPORTANT REMARK 
+// merging of stateProps and props of the connected component : 
+
+
+connect accepts four different parameters, all optional. By convention, they are called:
+
+mapStateToProps: Function
+
+mapDispatchToProps: Function | Object
+
+mergeProps: Function
+
+options: Object
+
+If your mapStateToProps function is declared as taking one parameter, it will be called whenever the store state changes, and given the store state as the only parameter.
+
+Your mapStateToProps functions are expected to return an object. This object, normally referred to as stateProps, will be merged as props to your connected component.
+
+
+EXAMPLE OF THE IMPORTANT REMARK : 
+
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+
+class SongList extends Component {
+  render(){
+    console.log(this.props)
+    return <div>SongList</div>
+  }
+}
+const mapStateToProps = (state) => {
+  return { songs: state.songs }
+}
+
+export default connect(mapStateToProps)(SongList)
+
+--> OUPUT : this.props = state      and     this.props.songs = state.songs 
+--> the merging was done 
 ## Available Scripts
 
 In the project directory, you can run:
